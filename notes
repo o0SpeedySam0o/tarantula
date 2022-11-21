@@ -1,0 +1,71 @@
+working with hardware: 
+
+Kernel - the interface between HW and SW for the computer. 
+
+uname - displayi nfo about the kernel
+
+uanme -r/uname-a to print kernel version
+	divided into Kernel space and User space. 
+
+dmesg - display messages from the ring buffer of the Kernel
+
+less - to redirect the messages
+
+grep - to search for specific keywords within those messages
+
+	Example: demsg | grep -i usb 
+	search for the keyword "USB" within the dmesg
+
+Udev:
+
+database with HW info - devices that are connected to the system
+
+udevadm - command the udev database
+
+udevadm info - query the database for device info.
+	Example: udevadm info --query=path --name=/dev/sda5
+
+udevadm monitor - listening for Uevents
+
+lspci - list pci 
+PCI - PERIPHERAL COMPONENT INTERCONNECT
+show info about all PCI-devices configured in the system
+
+lsblk - list block devices
+lists info about block devices
+
+sda - physical drive
+|_sda1 - partition 1
+|_sda2 - partition 2
+|_sda3 - partition 3
+|_sda4 - partition 4
+|_sda5 - partition 5
+
+lscpu - list cpu info
+
+lsmem - list memory info
+lsmem --summary - get summary of memory info 
+
+free - show the available vs. used memory. -m for megabytes -k for kilobytes -g for gigabytes
+
+lshw - get detailed hardware info 
+
+Linux Boot sequence:
+Starts after POST. BIOS executes the boot code from the boot device, located on the 1st sector of the HDD. In linux, it's located in /boot filesystem
+POST> Boot loader(currently GRUB2)>Kernel initialization> INIT process(currently systemd)
+* GRUB2: GRand Unified Boot loader2
+* INIT process: up until recently - System V INIT, aka SYS5. Was used on RHEL 6 and CentOS 6. Current standard - systemd.
+systemd can run service startup in parallel, rather than linear, making it quicker and more efficient than sys5.
+
+Kernels are stored on the drive in a compressed form to save space. during startup sequence, the kernel decompresses and initializes hardware, starts memory management proesses and other things. 
+
+check what INIT process is used by the system:
+ls -l /sbin/init
+
+
+Runlevels:
+
+there's more than one way to use linux - there's Graphical User Interface - GUI , and there's Command Line Interface - CLI.
+
+the "way to use" linux is called a Runlevel, and it can be checked with the command runlevel. 
+systemd refers to a runlevel as a target
