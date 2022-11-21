@@ -202,7 +202,22 @@ specifying an argument - in this case, a package name, will focus YUM on this sp
 
 
 
-DPKG - Debian Package 
+DPKG - Debian Package manager
+
+packages have a ".deb" extension. 
+
+Like RPM - it doesn't handle dependecies. Thus, APT or apt-get are more useful
+
+APT - advanced package managers. better and more user friendly than apt-get
+
+apt update - update the repo
+apt upgrade - update the packages installed on the system
+apt edit-sources - opens /etc/apt/sources.list in any preferred text editor (same as doing vi/ vim to this path)
+
+apt install - install
+apt remove - delete
+apt search - look for a pack in the repo
+apt list - list all available packages. use with | grep to search for a specific one
 
 
 
