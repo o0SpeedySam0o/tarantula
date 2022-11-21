@@ -68,4 +68,21 @@ Runlevels:
 there's more than one way to use linux - there's Graphical User Interface - GUI , and there's Command Line Interface - CLI.
 
 the "way to use" linux is called a Runlevel, and it can be checked with the command runlevel. 
-systemd refers to a runlevel as a target
+GUI is runlevel 5 and CLI is runlevel 3.
+systemd refers to a runlevel as a target. 
+systemd target for GUI is graphical.target.
+systemd target for CLI is multiuser.target.
+
+Check current target: 
+
+systemctl get-default
+
+ls -ltr /etc/systemd/system/default.target
+
+WHAT IS LTR?! 
+
+l: This is for the long listing of the contents. It shows one file in each line with additional info such as permissions, ownership, size, timestamps etc.
+t: This one sorts the long listing output based on time.
+r: This one reverses the order of ls command output.
+
+running LTR means you get the entire list, sorted by date, earliest to latest, in a top to bottom order.
