@@ -69,7 +69,27 @@ there's more than one way to use linux - there's Graphical User Interface - GUI 
 
 the "way to use" linux is called a Runlevel, and it can be checked with the command runlevel. 
 GUI is runlevel 5 and CLI is runlevel 3.
-systemd refers to a runlevel as a target. 
+
+Targets:
+
+The term runlevels is used in the sysV init systems. These have been replaced by systemd targets in systemd based systems.
+
+The complete list of runlevels and the corresponding systemd targets can be seen below:
+
+runlevel 0 -> poweroff.target
+
+runlevel 1 -> rescue.target
+
+runlevel 2 -> multi-user.target
+
+runlevel 3 -> multi-user.target
+
+runlevel 4 -> multi-user.target
+
+runlevel 5 -> graphical.target
+
+runlevel 6 -> reboot.target
+
 systemd target for GUI is graphical.target.
 systemd target for CLI is multiuser.target.
 
@@ -86,3 +106,35 @@ t: This one sorts the long listing output based on time.
 r: This one reverses the order of ls command output.
 
 running LTR means you get the entire list, sorted by date, earliest to latest, in a top to bottom order.
+
+change the default target: 
+Example - move from GUI to CLI 
+systemctl set-default multi-user.target
+
+
+File types:
+EVERYTHING IS A FILE IN LINUX
+
+3 types of files: 
+
+Regular File - pics, scripts, configs, data, text etc. 
+
+Directory - contains regular files. /home/username /root /etc/systemd/ /home/bob/code-library
+
+Special files:
+a special file belongs to one of the following 5 sub categories:
+
+* Character files: represent devices. found in /dev and allows the OS to communicate with I/O devices serially. Devices such as a Mouse and Keyboard.
+* Block files: represent block devices. found in /dev. a block device and reads from and writes to the device in chunks of data called blocks. example: Hard disk and RAM.
+* Link files: used when there's a need to associate a set of file data more than one name. 2 types
+	* hard link: for 2 or more file names that share the same block of data on the physical disk. delete any of the links, and the data is gone, even if the other link is still intact. 
+	* soft link: known as a symbolic link, or symlink. similarly to shortcuts in Windows, these point to another file. Delete the symlink and the data remains intact
+* Socket files: enable the communication between 2 processes. 
+* Named pipes: allow connecting between processes by using one process as an input to the other. the data flow in pipes is unidirectional - data only goes one way, from the 1st process to the 2nd.
+
+
+
+
+
+
+
