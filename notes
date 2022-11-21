@@ -110,6 +110,7 @@ running LTR means you get the entire list, sorted by date, earliest to latest, i
 change the default target: 
 Example - move from GUI to CLI 
 systemctl set-default multi-user.target
+sudo systemctl set-default multi-user.target
 
 
 File types:
@@ -131,6 +132,79 @@ a special file belongs to one of the following 5 sub categories:
 	* soft link: known as a symbolic link, or symlink. similarly to shortcuts in Windows, these point to another file. Delete the symlink and the data remains intact
 * Socket files: enable the communication between 2 processes. 
 * Named pipes: allow connecting between processes by using one process as an input to the other. the data flow in pipes is unidirectional - data only goes one way, from the 1st process to the 2nd.
+
+file - Check what type of file is something. 
+Example: file/home/michael
+	 file bash-script.sh
+	 file insync1000.sock
+	 file /home/michael/bash-script
+
+second option to check file type: ls -ld 
+
+Example: ls -ld /home/michael/
+
+Filesystem hirearchy:
+
+df - disk filesystem command. print out details about all mounted filesystem
+
+df -hP
+
+/home - home directory for any user that isn't a root user.
+/root - root user's home directory
+/var - where logs are stored
+/usr - where userland stuff is stored such as user programs - Thnderbird mail, VI editor etc. 
+/tmp - storage for temporary data - program installers for example.
+/opt - the right place to install any 3rd party program, such as web apps
+/mnt - a temprary location to mount filesystems unto. Repositories fro example. to mount a repo, use the mount command.
+/media - all external media connected to the computer appear here.
+/bin - storage for basic commands such as cp mv mkdir etc.
+/etc - storage for config files 
+/lib and /lib64 - saerch for shared libraries available for import. 
+/boot - boot sequence stuff.
+/dev - contains data about 2 special file types: block devices - aka device nodes, and character files 
+
+PACKAMN: Package management
+
+Package: a compressed archive containing all the files and data required for a spercific software to run.
+
+Package managers perform the following tasks: 
+check package intergrity andauthenticity
+manage the installation and deletion of packaged content
+package grouping to keep things intelligible and prevent user confusion
+manage dependencies - ensuring all relevant content for a program to run including any dependencies and sub-dependencies are all installed.
+
+Linux distros are gnerally differed by the packman they're based on - RPM or DPKG
+
+RPM - RedHat Package Manager
+
+RPM database stores all the info about the installed packages in the system. info is stored in /var/lib/rpm
+
+what packages are installed
+what istheir version
+what changed in the package since installation
+etc
+
+RPM does NOT resolve dependencies, and that's why YUM is used
+
+YUM: Yellow dog updater, modified. 
+
+- can manage packages along with dependencies
+- works with RPM based linux distros 
+- has a list of SW repos it can search through to find and install packages. Location: /etc/yum.repos.d | repos have a ".repo" extension.
+- high level packman
+
+yum repolist - display list of available repos for yum to search through
+yum provides - display required packages for specific commands to work
+yum install - install a package
+yum remove - remove a package 
+yum update - update. with no argument following the command, yum will attempt updating all installed packages on the device. 
+specifying an argument - in this case, a package name, will focus YUM on this specific package. 
+
+
+
+DPKG - Debian Package 
+
+
 
 
 
