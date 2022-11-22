@@ -1,0 +1,188 @@
+Shell Part 2:
+
+file compression and archival:
+
+du - disk usage. check how much space does a file take up.
+du -sk : show size in kb. -sh: human readable. will be displayed in MB
+
+File size can also be shown through ls command, with the -h flag
+
+archiving:
+
+TAR - Tape Archvie. tar archives are known as tar balls. 
+
+syntax: tar <archive I refer to> <what do I want to do with it>
+
+tar -cf: create file. 
+-c: create
+-f: name the archive "something"
+Example: tar -cf test.tar file1 file2 file3 - create a new archive called test.tar and have it contain file1, file2 and file 3.
+
+tar -tf: check the contents of a tar ball
+
+tar -xf: extract the contents from the file.
+
+tar -zcf: compress the file
+
+
+Compression - shrink the size of a file. an algoryhtm runs to make the same amount of data weigh less. 
+
+Top 3 ways to compress:
+
+bzip2 - turn "file" to "file.bz2"
+gzip - turn "file" to "file.gz"
+xz - turn "file" to "file.xz"
+
+How to reverse this - decompression/unzipping:
+
+bunzip2
+gunzip
+unxz
+
+access data while keeping it compressed: 
+
+bzcat
+zcat
+xzcat
+
+
+Searching for files and directories:
+
+locate - return all results matching the provided pattern. 
+Pros: quick to find files in the linux filesystem
+	will return all paths containing the keyword
+cons:
+dpends on mlocate.db which isn't necessarily up to date at all times.
+
+mlocate.db can be manually updated ONLY BY A ROOT USER using the command updatedb 
+
+Example:
+locate city.txt
+
+find - search for something in a given directory.
+
+find /opt city.txt. 
+
+-name: find something by it's name. find /opt -name city.txt
+
+Searching inside files:
+
+grep - print lines of a file matching the provided pattern
+
+syntax: grep <search term> <file name to search for the term in>
+Example: grep hello main.txt
+
+grep is case sensitive by default, so it will search for EXACTLY what you input.
+
+-i: grep for something, case insensitive
+-r: recursive. I know where the file containing my term is, I don't know which file. 
+Example:
+grep -r "hello world" /home/michael
+
+return would be: ./sample.txt: hello world! this is a sample text file
+
+-v: grep for anytning BUT the search term. lines containig the search term will be excluded from the results
+
+-w: look for the search term as a whole only. Exclude instances of the search term appearing as part of a longer string.
+
+Example:
+file contents: 
+a concatenation is putting 2 things together, one after another with no spacing between them.
+A stary cat walked in the rain.
+
+Command: grep -w cat
+Return: A stary cat walked in the rain.
+
+with no flags, the return would've been both lines within the file, as "cat" appears in the 1st row as part of the word "concatenation"
+
+Combo: -wv will yield only the instances of the search term when it is part of a whole
+
+Example: 
+
+Command: grep -wv cat
+Return: a concatenation is putting 2 things together, one after another with no spacing between them.
+
+-A: after
+-B: Before
+
+B and A flags are used to grep the search term and one line before or after the result, respectively. 
+
+grep -A1: return 1 additional line after the matching result.
+
+grep -B3: return the 3 lines before the matching result in addition to it.
+
+grep -A1B3 "search term" will work and return the relevant lines as queried.
+
+I/O redirection:
+
+there are 3 standard data streams:
+
+STDIN - standard input: text from the user. Example: cat sample_text.txt
+STDOUT - standard output: results and responses to commands. Example: this is the text content
+STDERR - standard error: when something goes wrong. Example: cat: sample_text.txt: No such file or directory
+
+I/O redirection can be used to redirect those streams into text files
+
+STDOUT - can be redirected to a text file using the forward symbol ">"
+Example: echo $SHELL > shell.txt
+If such a file exists, its data is overwritten with the contents of the redirected STDOUT data. If it doesn't exist, it is created.
+
+data can be also appended without deleting the previous content by using the double forward ">>"
+Example: echo "this is the bash shell" >> shell.txt
+
+STDERR - can be redirected by using "2>" and appended using "2>>"
+execute commands without error messages even if they occur: command 2> /dev/null.
+
+/dev/null is the null file. nothing is generated there, nothing is kept there. It is referred to as a bit bucket and is basically a shredder to disacrd stuff you don't need.
+
+Pipes: "|"
+
+The pipe is used to string commands together, one after another, where the output of the frst is the input of the second and so on
+
+command1 | command2
+
+tee - forward the data stream to text file and print it on the screen
+
+echo "hello" | tee sample.txt
+
+if the file exists, it will be overwritten. Otherwise it will be created. 
+
+tee -a will append the forwarded data stream instead of overwriting the file
+
+Text editors:
+
+Cat can only take you so far and is far from ideal when dealing with large text files, or in need to make extensive changes to a file's content. 
+
+PUT ZIE CAT IN ZIE BLENDER AND MOVE TO VI!!!! 
+
+Vi editor:
+
+syntax: vi <file name -OR- /file/location/file_name>
+
+VI has 3 operation mode
+
+Command - the default mode Vi is set to when loaded.
+
+Possible commands are: highlight using the cursor copy, paste, delete a word, delete a line, move text and navigate the text.
+Navigating the text: arrow keys or K(UP) J(DOWN) H(LEFT) L(RIGHT) 
+Highlight and copy a section of text: right click, drag, release. 
+
+Copy: "yy"
+Paste: move cursor above the target line for text pasting, and press "p"
+Save: "ZZ"
+Delete a character: move cursor to the target char and hit "x"
+Delete a line: cursor anywhere on the line and hit "dd"
+Delete 3 lines: d3d
+Delete n lines: dnd
+Undo previous change: "u"
+Redo the change: "ctrl+r"
+Find a string "/<search term>" -OR- "?<search term>" using slash will trigger a search downward from the current cursor location
+
+
+Insert mode - triggered by pressing "i" in command mode and allows editing the text - writing, erasing etc. Return to command mode using "esc"
+Last line mode - triggered by pressing ":" in command mode and allows to save changes, discard them, and exit vi
+
+
+
+
+
